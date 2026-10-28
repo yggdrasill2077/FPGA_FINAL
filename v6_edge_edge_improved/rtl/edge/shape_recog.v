@@ -1,0 +1,752 @@
+//==============================================================================
+// shape_recog.v —— 形状识别（阶段二·最小可演示版）
+//
+//   赛题高阶第 6 项：圆形 / 矩形 / 未知 三类，只处理画面中最大的目标。
+//   明确不做：CCL 连通域、多目标、对称阶、三角形/十字细分、汉字 OSD。
+//
+//   结构
+//   ────────────────────────────────────────────────────────────────────────
+//   [stat] 逐像素单遍累加（2 像素/时钟，挂中值滤波输出）
+//        A / Σx / Σy / Σxx / Σyy / Σxy / bbox
+//        前景 = POLARITY ? (gray <= THRESH) : (gray > THRESH)
+//        A 一旦 ≥ 65530 就冻结累加 → 所有累加器宽度有限且数学上永不溢出
+//        （65530 只是位宽满量程；判类窗口另由 A_MIN / A_MAX 给出）
+//        双像素同拍：x0 = 2*pcol, x1 = x0+1
+//        x0² / x1² / y·x0 / y·x1 全部用「增量寄存器」预先生成，
+//        每拍只剩一级加法 + 二选一，避免 11x11 乘法器进入 74.25MHz 路径
+//
+//   [math] 帧末串行乘除引擎（一台共享数据通路，一帧只跑一次）
+//        P   = A·Σxx − Σx²      Q = A·Σyy − Σy²      R = A·Σxy − Σx·Σy
+//        m20 = P·2^12/A²        m02 = Q·2^12/A²      m11 = R·2^12/A²   (Q12)
+//        tr  = m20 + m02
+//        c_g = A/(π·tr) ≥ 1.965   ⟺   A·10616 ≥ tr          ← 无除法、无开方
+//        LQ  = (m20>>4)(m02>>4) − (m11>>4)² ,  W = LQ/A²
+//        f_mom ≥ 0.965 ⟺ W ≤ 488                              ← 用 f_mom² 消掉开方
+//        判序：面积门限 → 圆 → 矩 → 未知（★圆必须排在矩形之前）
+//
+//   数学上为什么用 P/Q/R 而不是 Σxx/A − cx²：
+//        后者在目标偏离画面原点时两个大数相减，定点会丢 ~10bit；P/Q/R 是精确
+//        整数分子（平行轴公式的整数形式），除法只在最后做一次。
+//
+//   坐标口径
+//        x = 0 .. 2*H_PAIRS-1（同拍两像素是相邻列）
+//        y = 0 .. V_LINES-1
+//==============================================================================
+module shape_recog #(
+    parameter integer H_PAIRS  = 960,        // 行内像素对数（1920/2）
+    parameter integer V_LINES  = 1080,       // 帧行数
+    parameter [7:0]   THRESH   = 8'd128,     // 前景灰度阈值（TH_MODE=0 时使用）
+    parameter         POLARITY = 1'b0,       // 保留（当前由边框带自动判极性）
+    // ---- 阈值模式 / bbox 合理性 / 填充度门控（R3~R7）----
+    parameter integer TH_MODE  = 0,          // 0 = 固定 THRESH + 自动极性（可预测）；1 = 相对帧均值
+    parameter [7:0]   TH_DELTA = 8'd24,      // TH_MODE=1 时与帧均值的偏差门限
+    parameter integer BBX_MAX  = 1800,       // bbox 宽度上限（超限判为背景/杂物）
+    parameter integer BBY_MAX  = 1000,       // bbox 高度上限
+    parameter integer A_MIN    = 10,         // 最小面积（采样数，1 样本 = 16 px）→ 160 px
+    parameter integer A_MAX    = 60000,      // 最大面积（采样数）→ 96 万 px（近整屏）
+    parameter integer FILL_MIN = 297,        // 填充度下限（Q10：A_true/bbox_px ≥ 297/1024 ≈ 0.29）
+    // ---- 模板匹配（R11）----
+    parameter integer THAM     = 256,        // 汉明距离门限（1024 格，初值 25%）
+    parameter integer TMPL_MIN = 32,         // 模板 bbox 最小边（小于此值直接未知）
+    // ---- T1 修复：白底阈值入参数表；网格格宽/格高参数化（原为硬编码 480/270）----
+    parameter [7:0]   TY       = 8'd170,     // 固定白底阈值（AUTO_TY=0 时使用）
+    parameter integer AUTO_TY = 1,           // 1 = 阈值自适应：TY_eff = 上一帧最亮 − TY_MARGIN
+    parameter [7:0]   TY_MARGIN = 8'd60,    // 自适应余量（越小越严）
+    parameter [7:0]   TY_CAP    = 8'd110,   // 自适应阈值上限（阴影 150+、皮肤 120+，卡在 110 只留深色形状）
+    parameter integer CELL_W   = 480,        // 网格格宽（px），默认 1920/4
+    parameter integer CELL_H   = 270,        // 网格格高（px），默认 1080/4
+    parameter integer CELL_MIN = 150,        // 目标格前景下限（采样数）。150=2400px：圆 D≈55、方 D≈49；三角/十字需 ≳80 px（见 sim/evidence_size160）
+    parameter integer BOX_ON_ANY = 0,        // 1 = 只要有前景就画框（诊断用，绕过类别门控）
+    parameter integer WIN_EN = 0,            // 1 = 启用上一帧最佳格窗口（会裁掉大于 960x540 的目标，默认关）
+    parameter integer MARGIN_PCT = 8        // 忽略画面四周 MARGIN_PCT% 的边带（手/桌沿/阴影集中在边缘）
+)(
+    input  wire        clk,                  // vid_clk_dvi2 (74.25MHz, 2ppc)
+    input  wire        rst_n,                // vid_rst_n
+    input  wire        i_de,                 // med_de
+    input  wire        i_vs,                 // med_vs
+    input  wire [7:0]  i_g0,                 // med_g0
+    input  wire [7:0]  i_g1,                 // med_g1
+    output reg  [2:0]  o_cls,                // 000 未知 / 001 圆 / 010 方 / 011 三角 / 100 十字
+    output reg         o_upd,                // 类别更新脉冲（1 拍）
+    output wire [10:0] o_bx0,                // 前景 bbox（帧锁存，相机坐标）
+    output wire [10:0] o_bx1,
+    output wire [10:0] o_by0,
+    output wire [10:0] o_by1,
+    output wire        o_box_en,             // 1 = 本帧分类成立（画检测框）
+    output wire [3:0]  o_best_idx,           // 4×4 网格里前景最多的格（R8）
+    output wire [13:0] o_best_cnt            // 该格的前景样本数
+);
+
+    //--------------------------------------------------------------------------
+    // 1. 前景判定（W1：白背景假设）
+    //    白底场景下目标 = "非白"：亮度 Y < TY
+    //    F2：自适应阈值 —— 用上一帧的亮区最大值 max_y_l，TY_eff = max_y_l − TY_MARGIN
+    //        （纸在不同光照下亮度 130~245，固定 170 在暗光下会把背景全判成前景）
+    //    F3：前景占比门控 —— 目标应占画面 0.2%~50%，否则判"未知"（防止背景被整片误检）
+    //--------------------------------------------------------------------------
+    reg  [7:0] max_y;        // 本帧亮区最大值（1/16 采样；累加在 2b 节，需 smp）
+    reg  [7:0] max_y_l;      // 上一帧最大值（本帧用来定阈值）
+
+    // F2b：自适应阈值再加一个**上限**。白纸上的阴影通常 150~200、手的皮肤 120~160，
+    //      而深色形状 30~70。只靠"最亮−60"在亮纸下会得出 180，把阴影/手都算进来。
+    //      加上 TY_CAP（默认 110）后：亮纸→110、暗纸→90，只留"明显比背景暗"的东西。
+    wire [8:0] ty_calc = {1'b0, max_y_l} - TY_MARGIN;
+    wire [7:0] ty_auto = (ty_calc[8] || (ty_calc[7:0] > TY_CAP)) ? TY_CAP : ty_calc[7:0];
+    wire [7:0] ty_eff  = AUTO_TY ? ty_auto : TY;
+
+    wire fg0 = (i_g0 < ty_eff);
+    wire fg1 = (i_g1 < ty_eff);
+    wire pol_r = 1'b0;                       // 兼容保留（白底下无极性概念）
+
+    // 帧起始单拍（供网格扫描/快照使用）
+    reg  vs_dg;
+    wire vs_rg = i_vs & ~vs_dg;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) vs_dg <= 1'b0;
+        else        vs_dg <= i_vs;
+    end
+
+    //--------------------------------------------------------------------------
+    // 2. 列号 / 行号
+    //--------------------------------------------------------------------------
+    reg [9:0] pcol;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n)                        pcol <= 10'd0;
+        else if (!i_de)                    pcol <= 10'd0;
+        else if (pcol == (H_PAIRS - 1))    pcol <= 10'd0;
+        else                               pcol <= pcol + 10'd1;
+    end
+
+    wire [11:0] x0 = {1'b0, pcol, 1'b0};     // 2*pcol
+    wire [11:0] x1 = x0 + 12'd1;
+
+    reg  [11:0] row;
+    reg  [20:0] y2;                          // row²
+    reg         de_d;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            row <= 12'd0; y2 <= 21'd0; de_d <= 1'b0;
+        end else begin
+            de_d <= i_de;
+            if (i_vs) begin
+                row <= 12'd0;
+                y2  <= 21'd0;
+            end else if (de_d && !i_de) begin           // 行结束
+                row <= row + 12'd1;
+                y2  <= y2 + {row, 1'b0} + 21'd1;        // +2*row+1 → (row+1)²
+            end
+        end
+    end
+
+    //--------------------------------------------------------------------------
+    // 3. 增量坐标量（全部预生成并打拍，不进组合乘法）
+    //    pcol → pcol+1 时： x0² += 8*pcol+4 ，  x1² += 8*pcol+8
+    //                       y·x0 += 2y      ，  y·x1 += 2y
+    //--------------------------------------------------------------------------
+    reg [21:0] xsq0, xsq1;
+    reg [21:0] yx0,  yx1;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            xsq0 <= 22'd0; xsq1 <= 22'd1; yx0 <= 22'd0; yx1 <= 22'd0;
+        end else if (!i_de) begin                       // 行首/消隐 → 装载初值
+            xsq0 <= 22'd0;
+            xsq1 <= 22'd1;
+            yx0  <= 22'd0;
+            yx1  <= {10'd0, row};                       // y·x1 = y·1
+        end else begin
+            xsq0 <= xsq0 + {pcol, 3'b0} + 22'd4;
+            xsq1 <= xsq1 + {pcol, 3'b0} + 22'd8;
+            yx0  <= yx0  + {row, 1'b0};
+            yx1  <= yx1  + {row, 1'b0};
+        end
+    end
+
+    //--------------------------------------------------------------------------
+    // 4. 单遍累加（面积冻结在 65530，保证位宽）
+    //--------------------------------------------------------------------------
+    // R4：统计改到 1/16 采样域（每 4×4 块取 1 个样本），支持"目标占半屏"
+    //     半屏 ≈ 1.04e6 px → 65,000 样本，仍在 16bit 面积 + 现有串行引擎位宽内
+    wire        smp       = (row[1:0] == 2'b00) && (pcol[0] == 1'b0);
+
+    //--------------------------------------------------------------------------
+    // 2b. 帧内最亮值（供 F2 自适应阈值）—— 1/16 采样，帧末锁存
+    //--------------------------------------------------------------------------
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            max_y <= 8'd0; max_y_l <= 8'd200;
+        end else if (vs_rg) begin
+            max_y_l <= max_y;
+            max_y   <= 8'd0;
+        end else if (i_de && smp && (i_g0 > max_y)) begin
+            max_y <= i_g0;
+        end
+    end
+    reg  [15:0] area;
+    reg  [26:0] sum_x;
+    reg  [26:0] sum_y;
+    reg  [37:0] sum_xx;
+    reg  [36:0] sum_yy;
+    reg  [37:0] sum_xy;
+
+    wire        area_full = (area >= 16'd65530);
+
+    //--------------------------------------------------------------------------
+    // 2.2 窗口门控（R9）：用「上一帧最佳格 ± 半格」圈定本帧统计范围
+    //   目的：排除背景/多目标——只有窗口内的前景进入 A/矩/bbox
+    //   最佳格在 4c 里更新（帧末分 16 拍扫描），这里只用上一帧结果
+    //--------------------------------------------------------------------------
+    reg  [13:0] best_cnt;
+    reg  [3:0]  best_idx;
+    reg  [4:0]  scan_k;          // 帧末扫描指针（0..17），17 = 完成（触发计数器清零）
+    reg  [13:0] scan_max;
+    reg  [3:0]  scan_idx;
+
+    // T1：格宽/格高参数化（默认 480×270）。窗口 = 最佳格 ± 半格，即 2×CEL_W 宽、2×CEL_H 高
+    localparam integer TOT_W = H_PAIRS * 2;
+    localparam integer TOT_H = V_LINES;
+    localparam integer HW    = CELL_W / 2;
+    localparam integer HH    = CELL_H / 2;
+
+    wire [11:0] cell_x0 = (best_idx[1:0] == 2'd0) ? 12'd0          :
+                          (best_idx[1:0] == 2'd1) ? CELL_W[11:0]   :
+                          (best_idx[1:0] == 2'd2) ? (2*CELL_W)     : (3*CELL_W);
+    wire [11:0] cell_y0 = (best_idx[3:2] == 2'd0) ? 12'd0          :
+                          (best_idx[3:2] == 2'd1) ? CELL_H[11:0]   :
+                          (best_idx[3:2] == 2'd2) ? (2*CELL_H)     : (3*CELL_H);
+    wire [11:0] win_x0 = (cell_x0 > (HW-1)) ? (cell_x0 - HW) : 12'd0;
+    wire [11:0] win_x1 = (cell_x0 + 2*CELL_W - HW - 1 < TOT_W) ?
+                         (cell_x0 + 2*CELL_W - HW - 1) : (TOT_W - 1);
+    wire [11:0] win_y0 = (cell_y0 > (HH-1)) ? (cell_y0 - HH) : 12'd0;
+    wire [11:0] win_y1 = (cell_y0 + 2*CELL_H - HH - 1 < TOT_H) ?
+                         (cell_y0 + 2*CELL_H - HH - 1) : (TOT_H - 1);
+    wire        in_win = (x0 >= win_x0) && (x0 <= win_x1) &&
+                         (row >= win_y0) && (row <= win_y1);
+
+    // F1 修复：窗口门控默认关闭。实测（sim/tb_full.v, 1920x1080）600x400 目标被
+    //   窗口边界裁掉左边 60 px / 上边 68 px → bbox 不贴目标、类别也受影响。
+    //   窗口 = 最佳格 ± 半格 = 960x540，任何超过该尺寸的目标都会被切。
+    // F4：边带门控 —— 只统计画面中心 (100-2*MARGIN_PCT)% 区域
+    localparam integer MGX = (H_PAIRS * 2 * MARGIN_PCT) / 100;
+    localparam integer MGY = (V_LINES  * MARGIN_PCT) / 100;
+    wire in_roi = (x0  >= MGX[11:0]) && (x0  <= (TOT_W - 1 - MGX)) &&
+                  (row >= MGY[11:0]) && (row <= (TOT_H - 1 - MGY));
+    //--------------------------------------------------------------------------
+    // F6（纸定位）：亮区 bbox（1/16 + 腐蚀），用来把 CCL 限制在纸内
+    //--------------------------------------------------------------------------
+    wire        in_win_eff = WIN_EN ? in_win : in_roi;
+    wire        acc_en    = i_de && smp && !area_full && in_win_eff;
+
+    wire [12:0] add_sx  = fg0 ? {1'b0, x0} : 13'd0;
+    wire [12:0] add_sy  = fg0 ? row : 12'd0;
+    wire [22:0] add_sxx = fg0 ? xsq0 : 22'd0;
+    wire [21:0] add_syy = fg0 ? y2  : 21'd0;
+    wire [22:0] add_sxy = fg0 ? yx0 : 22'd0;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            area <= 16'd0; sum_x <= 27'd0; sum_y <= 27'd0;
+            sum_xx <= 38'd0; sum_yy <= 37'd0; sum_xy <= 38'd0;
+        end else if (i_vs) begin
+            area <= 16'd0; sum_x <= 27'd0; sum_y <= 27'd0;
+            sum_xx <= 38'd0; sum_yy <= 37'd0; sum_xy <= 38'd0;
+        end else if (acc_en) begin
+            area   <= area + {15'd0, fg0};
+            sum_x  <= sum_x  + add_sx;
+            sum_y  <= sum_y  + add_sy;
+            sum_xx <= sum_xx + add_sxx;
+            sum_yy <= sum_yy + add_syy;
+            sum_xy <= sum_xy + add_sxy;
+        end
+    end
+
+    //--------------------------------------------------------------------------
+    // 4b. （W1 白背景下不再需要极性统计，原边框带判背景逻辑已移除）
+    //--------------------------------------------------------------------------
+
+    //--------------------------------------------------------------------------
+    // 4c. 网格 objectness（R8）：4×4 单元格前景计数 → 帧末选出"目标格"
+    //     单元格 480×270 px；1/16 采样后每格最多 8,100 样本（14 bit 足够）
+    //     用途：R9 的窗口门控（用上一帧最佳格圈定本帧统计范围）
+    //--------------------------------------------------------------------------
+    // T1：格界参数化（原来硬编码 480/960/1440、270/540/810 → TB 小帧无法覆盖选格）
+    wire [1:0] gcx = (x0  >= 3*CELL_W) ? 2'd3 : (x0  >= 2*CELL_W) ? 2'd2 :
+                     (x0  >= CELL_W)   ? 2'd1 : 2'd0;
+    wire [1:0] gcy = (row >= 3*CELL_H) ? 2'd3 : (row >= 2*CELL_H) ? 2'd2 :
+                     (row >= CELL_H)   ? 2'd1 : 2'd0;
+    wire [3:0] gcell = {gcy, gcx};
+    wire       gc_en = i_de && smp && fg0 && !area_full;
+
+    // P0-1 修复：scan_k==17 的清零只能发生在「进入该状态的那一拍」。
+    // 原实现把 scan_k==17 当电平原样使用，而扫描 FSM 到 17 后不再改 scan_k，
+    // 于是整帧 250 万拍每拍都清零 gcnt → best_cnt≡0 → cell_ok≡0 → o_cls≡0。
+    reg  scan_k17_d;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) scan_k17_d <= 1'b0;
+        else        scan_k17_d <= (scan_k == 5'd17);
+    end
+    wire scan_clear_pulse = (scan_k == 5'd17) && !scan_k17_d;
+
+    reg [13:0] gcnt [0:15];
+    genvar gi;
+    generate
+        for (gi = 0; gi < 16; gi = gi + 1) begin : G_GRID
+            always @(posedge clk or negedge rst_n) begin
+                if (!rst_n)                          gcnt[gi] <= 14'd0;
+                else if (scan_clear_pulse)           gcnt[gi] <= 14'd0;   // 进入 k=17 的单拍清零
+                else if (gc_en && (gcell == gi))     gcnt[gi] <= gcnt[gi] + 14'd1;
+            end
+        end
+    endgenerate
+
+    // 16 选 1 最大值：帧末（消隐期）分 16 拍扫描，避免组合比较链过长
+    // 执行顺序：vs 上升沿启动 → k=0..15 比较 → k=16 锁存结果 → k=17 清零计数器
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            scan_k <= 5'd0; scan_max <= 14'd0; scan_idx <= 4'd0;
+            best_cnt <= 14'd0; best_idx <= 4'd0;
+        end else if (vs_rg) begin
+            scan_k   <= 5'd0;
+            scan_max <= 14'd0;
+            scan_idx <= 4'd0;
+        end else if (scan_k < 5'd16) begin
+            if (gcnt[scan_k[3:0]] > scan_max) begin
+                scan_max <= gcnt[scan_k[3:0]];
+                scan_idx <= scan_k[3:0];
+            end
+            scan_k <= scan_k + 5'd1;
+        end else if (scan_k == 5'd16) begin
+            best_cnt <= scan_max;
+            best_idx <= scan_idx;
+            scan_k   <= 5'd17;
+        end
+    end
+
+    assign o_best_idx = best_idx;
+    assign o_best_cnt = best_cnt;
+
+    //--------------------------------------------------------------------------
+    // 5. bbox（前景包围盒，用于合理性拒绝与 OSD 检测框）
+    //--------------------------------------------------------------------------
+    reg [10:0] bbx0, bbx1, bby0, bby1;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n || i_vs) begin
+            bbx0 <= 11'h7FF; bbx1 <= 11'd0; bby0 <= 11'h7FF; bby1 <= 11'd0;
+        end else if (acc_en) begin
+            if (fg0) begin
+                if (x0[10:0] < bbx0) bbx0 <= x0[10:0];
+                if (x0[10:0] > bbx1) bbx1 <= x0[10:0];
+                if (row[10:0] < bby0) bby0 <= row[10:0];
+                if (row[10:0] > bby1) bby1 <= row[10:0];
+            end
+        end
+    end
+
+    //--------------------------------------------------------------------------
+    // 6. 帧末快照 + 启动数学引擎（vs 上升沿，避免 vs 高电平期间重复触发）
+    //--------------------------------------------------------------------------
+    reg        vs_d;
+    wire       vs_rise = i_vs & ~vs_d;
+
+    reg [15:0] s_area;
+    reg [26:0] s_sx;
+    reg [26:0] s_sy;
+    reg [37:0] s_sxx;
+    reg [36:0] s_syy;
+    reg [37:0] s_sxy;
+    reg        start;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            vs_d <= 1'b0; start <= 1'b0;
+            s_area <= 16'd0; s_sx <= 27'd0; s_sy <= 27'd0;
+            s_sxx <= 38'd0; s_syy <= 37'd0; s_sxy <= 38'd0;
+        end else begin
+            vs_d  <= i_vs;
+            start <= 1'b0;
+            if (vs_rise) begin
+                s_area <= area;   s_sx  <= sum_x;  s_sy  <= sum_y;
+                s_sxx  <= sum_xx; s_syy <= sum_yy; s_sxy <= sum_xy;
+                start  <= 1'b1;
+            end
+        end
+    end
+
+    //--------------------------------------------------------------------------
+    // 6b. bbox 快照 + 合理性拒绝（R3 新增）
+    //     拒绝条件：无前景 / 触边（背景杂物被截断）/ bbox 过宽过高（大背景块）
+    //     命中任一 → 类别强制为"未知"，宁可不判也不错判
+    //--------------------------------------------------------------------------
+    reg [10:0] s_bx0, s_bx1, s_by0, s_by1;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            s_bx0 <= 11'h7FF; s_bx1 <= 11'd0; s_by0 <= 11'h7FF; s_by1 <= 11'd0;
+        end else if (vs_rise) begin
+            s_bx0 <= bbx0; s_bx1 <= bbx1; s_by0 <= bby0; s_by1 <= bby1;
+        end
+    end
+
+    wire [11:0] bw = (s_bx1 >= s_bx0) ? ({1'b0,s_bx1} - {1'b0,s_bx0} + 12'd1) : 12'd0;
+    wire [11:0] bh = (s_by1 >= s_by0) ? ({1'b0,s_by1} - {1'b0,s_by0} + 12'd1) : 12'd0;
+
+    wire rej_empty = (s_bx1 < s_bx0) || (s_by1 < s_by0);
+    // T1：采样点 x 最大 = TOT_W-4、y 最大 = TOT_H-4（row%4==0 且 x0%4==0），
+    //     原来写 1919/1079 → 右/下判据永不触发（死代码）
+    wire rej_touch = (s_bx0 == 11'd0) || (s_by0 == 11'd0) ||
+                     (s_bx1 >= (TOT_W - 4)) || (s_by1 >= (TOT_H - 4));
+    wire rej_big   = (bw > BBX_MAX) || (bh > BBY_MAX);
+    wire rej_all   = rej_empty | rej_touch | rej_big;
+
+    //--------------------------------------------------------------------------
+    // 6b2. 置信度门控（R10）：宽高比 + 目标格前景数
+    //      aspect ∈ [1/4, 4]（排除细长条/线）
+    //      T2 修复：目标格前景下限参数化。原写死 150（=2400 px，等效直径≈55 px），
+    //      与 TMPL_MIN=32px 打架（32×32→A=64、40×40→A=100 都被它拦掉）。
+    //      160 例实测（sim/evidence_size160）：32~56 px 的三角形/十字不可靠，主因是 bbox 量化 ±4px 导致归一化偏移，故下限保持 150。
+    //--------------------------------------------------------------------------
+    wire asp_ok  = ({4'd0, bw, 2'b00} >= {1'b0, bh}) &&
+                   ({4'd0, bh, 2'b00} >= {1'b0, bw});
+    wire cell_ok = (best_cnt >= CELL_MIN[13:0]);
+
+    // F3：前景占比门控（1/16 采样后总样本数 = H_PAIRS*V_LINES/16）
+    localparam integer FRAME_SMP = (H_PAIRS * 2 * V_LINES) / 16;   // 1/16 抽样后的总样本数
+    wire frac_ok = (s_area >= (FRAME_SMP / 500)) && (s_area <= (FRAME_SMP / 2));
+
+    //--------------------------------------------------------------------------
+    // 6c. 填充度检查（R6）
+    //     fill = A_true/bbox_px = 16·A/(bw·bh) ≥ FILL_MIN/1024
+    //     ⟺ A·16384 ≥ FILL_MIN·bw·bh   （FILL_MIN = 256+32+8+1 = 297，移位加实现）
+    //     作用：散乱噪声、框住大片背景 → 填充度低 → 直接拒绝
+    //--------------------------------------------------------------------------
+    reg  [23:0] bwbh_r;
+    reg         fill_ok_r;
+    wire [23:0] bwbh_c = bw * bh;
+
+    // P0-2 修复：比较两边显式扩到 34bit。
+    //   16·A·1024 最大 1.07e9（30bit），297·bw·bh 最大 6.2e8（30bit）。
+    //   原式左侧 {11'd0,s_area}<<14 只有 27bit，右侧 {bwbh_r<<8}+... 也按
+    //   24/27bit 回绕，且两个回绕点不同 → 大 bbox 下比较结果错误
+    //   （400x400 实心方块 fill=1.00 被判成填充不足）。
+    wire [33:0] fill_lhs = {18'd0, s_area} << 14;
+    wire [33:0] fill_rhs = ({10'd0, bwbh_r} << 8) + ({10'd0, bwbh_r} << 5)
+                         + ({10'd0, bwbh_r} << 3) + {10'd0, bwbh_r};
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            bwbh_r <= 24'd0; fill_ok_r <= 1'b0;
+        end else begin
+            bwbh_r    <= bwbh_c;                                   // 12×12 乘法，独立一级
+            fill_ok_r <= (fill_lhs >= fill_rhs);                   // 16·A·1024 ≥ 297·bw·bh
+        end
+    end
+
+    // 供 OSD 画检测框（帧锁存值）
+    assign o_bx0 = s_bx0;
+assign o_bx1 = s_bx1;
+    assign o_by0 = s_by0;
+assign o_by1 = s_by1;
+    assign o_box_en = BOX_ON_ANY ? ~rej_empty : (o_cls != 3'd0);   // 诊断模式：有前景就画框
+
+    //--------------------------------------------------------------------------
+    // 7. 模板匹配（R11）：形状闸门粗筛 + 32×32 模板精分类
+    //    上一帧 bbox 在 tmpl_upd 时锁存，供下一帧归一化计数；
+    //    本帧分类用锁存值（与 R9 窗口同一套一帧滞后）。
+    //--------------------------------------------------------------------------
+    wire bbox_ok_now = (bw >= TMPL_MIN) && (bh >= TMPL_MIN) && !rej_all;
+    wire area_ok     = (s_area >= A_MIN) && (s_area <= A_MAX);
+
+    reg [10:0] t_bx0, t_bx1, t_by0, t_by1;
+    reg [10:0] t_thr;
+    reg        t_valid;
+
+    wire [2:0]  tmpl_cls;
+    wire        tmpl_upd;
+    wire [10:0] tmpl_min_dist;
+    wire [3:0]  tmpl_min_idx;
+
+    shape_tmpl #(
+        .H_PAIRS  (H_PAIRS),
+        .V_LINES  (V_LINES),
+        .TMPL_MIN (TMPL_MIN),
+        .THAM     (THAM)
+    ) u_tmpl (
+        .clk    (clk),
+        .rst_n  (rst_n),
+        .i_de   (i_de),
+        .i_vs   (i_vs),
+        .i_g0   (i_g0),
+        .i_g1   (i_g1),
+        .i_ty   (ty_eff),           // 自适应阈值，与统计侧一致
+        .i_bx0  (t_bx0),
+        .i_bx1  (t_bx1),
+        .i_by0  (t_by0),
+        .i_by1  (t_by1),
+        .i_thr  (t_thr),
+        .i_valid(t_valid),
+        .o_cls  (tmpl_cls),
+        .o_upd  (tmpl_upd),
+        .o_min_dist (tmpl_min_dist),
+        .o_min_idx  (tmpl_min_idx)
+    );
+
+    //--------------------------------------------------------------------------
+    // 8. 串行矩量引擎（保留作观测/面积链路；分类决策已改由 u_tmpl 给出）
+    //    其 o_cls/o_done 不再驱动 o_cls，综合会裁掉不用的数据通路。
+    //--------------------------------------------------------------------------
+    wire [1:0] cls_eng;
+    wire       eng_done;
+
+    shape_math #(
+        .A_MIN (A_MIN),
+        .A_MAX (A_MAX)
+    ) u_math (
+        .clk     (clk),
+        .rst_n   (rst_n),
+        .i_start (start),
+        .i_area  (s_area),
+        .i_sx    (s_sx),
+        .i_sy    (s_sy),
+        .i_sxx   (s_sxx),
+        .i_syy   (s_syy),
+        .i_sxy   (s_sxy),
+        .o_cls   (cls_eng),
+        .o_done  (eng_done)
+    );
+
+    //--------------------------------------------------------------------------
+    // 9. 结果闸门 + bbox/门限锁存
+    //--------------------------------------------------------------------------
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            o_cls    <= 3'd0;
+            o_upd    <= 1'b0;
+            t_bx0    <= 11'd0; t_bx1 <= 11'd0;
+            t_by0    <= 11'd0; t_by1 <= 11'd0;
+            t_thr    <= 11'd0;
+            t_valid  <= 1'b0;
+        end else begin
+            o_upd <= 1'b0;
+            if (tmpl_upd) begin
+                o_cls <= (rej_all | ~area_ok | ~frac_ok | ~fill_ok_r | ~asp_ok | ~cell_ok) ?
+                         3'd0 : tmpl_cls;
+                o_upd <= 1'b1;
+
+                // 当前帧 bbox 供下一帧计数；thr 用当前 bbox 的 bw*bh/2048
+                t_bx0   <= s_bx0;
+        t_bx1   <= s_bx1;
+                t_by0   <= s_by0;
+        t_by1   <= s_by1;
+                t_thr   <= {1'b0, bwbh_r[20:11]};
+                t_valid <= bbox_ok_now;
+            end
+        end
+    end
+
+endmodule
+
+
+//==============================================================================
+// shape_math —— 帧末串行乘除 + 分类
+//
+//   数据通路：64bit 移位/累加 + 32bit 操作数 + 31bit 余数 + 64bit 商
+//   乘法：移位加，N 拍（N = 乘数位宽）
+//   除法：恢复余数，64 拍
+//   一帧一共 9 乘 + 4 除 + 若干直通步 ≈ 466 拍 ≈ 6.3us @74.25MHz
+//   （1080p 垂直消隐有 ~600us，余量约 100 倍）
+//
+//   所有结果都用整数表示，阈值来自算法仿真：
+//     c_g  ≥ 1.965  ⟺  A·2^12/6.1732296 ≥ tr_q12  ⟺  A·10616 ≥ tr_q12
+//     f_mom≥ 0.965  ⟺  LQ/A² ≤ 65536/(144·0.965²) = 488.72 → W ≤ 488
+//==============================================================================
+module shape_math #(
+    parameter integer A_MIN = 10,            // 面积窗口下限（采样数；10 样本 = 160 px）
+    parameter integer A_MAX = 1920           // 面积窗口上限（采样数；1920 样本 = 30720 px）
+)(
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire        i_start,
+    input  wire [15:0] i_area,
+    input  wire [26:0] i_sx,
+    input  wire [26:0] i_sy,
+    input  wire [37:0] i_sxx,
+    input  wire [36:0] i_syy,
+    input  wire [37:0] i_sxy,
+    output reg  [1:0]  o_cls,
+    output reg         o_done
+);
+
+    localparam [4:0] RUN_MUL = 5'd30;
+    localparam [4:0] RUN_DIV = 5'd31;
+
+    reg [4:0]  pc, ret;
+    reg [6:0]  cnt;
+
+    reg [63:0] sh;          // 乘法被乘数 / 除法被除数（÷ 期间原地变成商）
+    reg [31:0] b;           // 乘法乘数   / 除法除数
+    reg [63:0] acc;         // 乘积累加
+    // 除法余数 33bit：1/16 采样后 A 上限 65530 → 除数 A² 最大 4.29e9 > 2^31，
+    // 必须按完整 32bit 参与比较；恢复余数法的中间量 rem_nxt = 2·rem + bit < 2·b，
+    // 故 33bit 是 b ≤ 2^32-1 时的最小安全位宽（原 31bit 会丢最高位并忽略 b[31]）。
+    reg [32:0] rem;
+
+    reg [15:0] a;
+    reg [26:0] sx;
+    reg [26:0] sy;
+    reg [37:0] sxx;
+    reg [36:0] syy;
+    reg [37:0] sxy;
+
+    reg [31:0] a2;
+    reg [55:0] t1;
+    reg [31:0] m20, m02, m11;
+    reg [55:0] lq;
+    reg [17:0] w;
+    reg        circ;
+
+    // 商饱和：W = LQ/A² 理论可达 42bit。18bit 覆盖本设计的常见量级
+    // （典型 1e5，判矩门限 125112 也在 18bit 内），超出即记满量程。
+    // 注意：w 只作观测，判矩用的是「LQ ≤ 125112·A²」的乘后比较。
+    wire [17:0] w_sat = (|sh[63:18]) ? 18'h3FFFF : sh[17:0];
+
+    // 除法一拍：余数左移进被除数最高位，够减则置商 1
+    //   除数按完整 32bit 对齐（b 是 32bit 寄存器，故扩展位只有 1 个 → 33bit 比较）
+    wire [32:0] rem_nxt = {rem[31:0], sh[63]};
+    wire [32:0] b_ext   = {1'b0, b};
+    wire        ge      = (rem_nxt >= b_ext);
+    wire [32:0] rem_sub = rem_nxt - b_ext;
+
+    // LQ = m20₈·m02₈ − m11₈²（组合值：既写寄存器，也直接当第 4 个除法的被除数）
+    wire [55:0] lq_c = (t1 >= acc[55:0]) ? (t1 - acc[55:0]) : 56'd0;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            pc <= 5'd0; ret <= 5'd0; cnt <= 7'd0;
+            sh <= 64'd0; b <= 32'd0; acc <= 64'd0; rem <= 33'd0;
+            a <= 16'd0; sx <= 26'd0; sy <= 25'd0;
+            sxx <= 37'd0; syy <= 36'd0; sxy <= 36'd0;
+            a2 <= 32'd0; t1 <= 56'd0; m20 <= 32'd0; m02 <= 32'd0; m11 <= 32'd0;
+            lq <= 56'd0; w <= 18'd0; circ <= 1'b0; o_cls <= 2'd0; o_done <= 1'b0;
+        end else begin
+            o_done <= 1'b0;
+
+            if (pc == RUN_MUL) begin
+                acc  <= acc + (b[0] ? sh : 64'd0);
+                sh   <= {sh[62:0], 1'b0};
+                b    <= {1'b0, b[31:1]};
+                cnt  <= cnt - 7'd1;
+                if (cnt == 7'd1) pc <= ret;
+
+            end else if (pc == RUN_DIV) begin
+                rem  <= ge ? rem_sub : rem_nxt;
+                sh   <= {sh[62:0], ge};      // 商从最低位原地移入，省掉独立商寄存器
+                cnt  <= cnt - 7'd1;
+                if (cnt == 7'd1) pc <= ret;
+
+            end else begin
+                case (pc)
+                //--------------------------------------------------------------
+                5'd0: if (i_start) begin                 // 锁存统计量
+                    a <= i_area; sx <= i_sx; sy <= i_sy;
+                    sxx <= i_sxx; syy <= i_syy; sxy <= i_sxy;
+                    pc <= 5'd1;
+                end
+                //--------------------------------------------------------------
+                5'd1: begin                              // A*A
+                    sh <= {48'd0, a}; b <= {16'd0, a}; cnt <= 7'd16;
+                    acc <= 64'd0; ret <= 5'd2; pc <= RUN_MUL;
+                end
+                5'd2: begin                              // a2 = A²
+                    a2 <= acc[31:0];
+                    sh <= {37'd0, sx}; b <= {5'd0, sx}; cnt <= 7'd27;
+                    acc <= 64'd0; ret <= 5'd3; pc <= RUN_MUL;
+                end
+                5'd3: begin                              // t1 = Σx²
+                    t1 <= acc[55:0];
+                    sh <= {26'd0, sxx}; b <= {16'd0, a}; cnt <= 7'd16;
+                    acc <= 64'd0; ret <= 5'd4; pc <= RUN_MUL;
+                end
+                5'd4: begin                              // m20 = (A·Σxx − Σx²)·2^12 / A²
+                    sh <= (acc - {8'd0, t1}) << 12;
+                    b  <= a2[31:0]; cnt <= 7'd64;
+                    rem <= 33'd0; ret <= 5'd5; pc <= RUN_DIV;
+                end
+                5'd5: begin
+                    m20 <= sh[31:0];
+                    sh <= {37'd0, sy}; b <= {5'd0, sy}; cnt <= 7'd27;
+                    acc <= 64'd0; ret <= 5'd6; pc <= RUN_MUL;
+                end
+                5'd6: begin                              // t1 = Σy²
+                    t1 <= acc[55:0];
+                    sh <= {27'd0, syy}; b <= {16'd0, a}; cnt <= 7'd16;
+                    acc <= 64'd0; ret <= 5'd7; pc <= RUN_MUL;
+                end
+                5'd7: begin                              // m02
+                    sh <= (acc - {8'd0, t1}) << 12;
+                    b  <= a2[31:0]; cnt <= 7'd64;
+                    rem <= 33'd0; ret <= 5'd8; pc <= RUN_DIV;
+                end
+                5'd8: begin
+                    m02 <= sh[31:0];
+                    sh <= {37'd0, sx}; b <= {5'd0, sy}; cnt <= 7'd27;
+                    acc <= 64'd0; ret <= 5'd9; pc <= RUN_MUL;
+                end
+                5'd9: begin                              // t1 = Σx·Σy
+                    t1 <= acc[55:0];
+                    sh <= {26'd0, sxy}; b <= {16'd0, a}; cnt <= 7'd16;
+                    acc <= 64'd0; ret <= 5'd10; pc <= RUN_MUL;
+                end
+                5'd10: begin                             // m11 = |R|·2^12 / A²
+                    // 协方差 R 可能为负（栅格化 / 面积冻结导致的轻微不对称）；
+                    // m11 只以平方形式进入 LQ，取绝对值不影响判据。
+                    sh <= ((acc >= {8'd0, t1}) ? (acc - {8'd0, t1})
+                                               : ({8'd0, t1} - acc)) << 12;
+                    b  <= a2[31:0]; cnt <= 7'd64;
+                    rem <= 33'd0; ret <= 5'd11; pc <= RUN_DIV;
+                end
+                5'd11: begin
+                    m11 <= sh[31:0];
+                    // 圆判据：a·10616 ≥ m20+m02（Q12）
+                    //   c_g = A_true/(π·tr)，A_true = 16·a（1/16 采样）
+                    //   ⟺ 16·a·4096 ≥ 1.965π·(m20+m02) ⟺ a·10616 ≥ tr
+                    circ <= ({16'd0, a} * 16'd10616 >= {1'b0, m20} + {1'b0, m02});
+                    // LQ 的第 1 个乘数
+                    sh <= {36'd0, m20[31:4]};
+                    b  <= {4'd0,  m02[31:4]};
+                    cnt <= 7'd28; acc <= 64'd0; ret <= 5'd12; pc <= RUN_MUL;
+                end
+                5'd12: begin                             // t1 = m20₈·m02₈
+                    t1 <= acc[55:0];
+                    sh <= {36'd0, m11[31:4]};
+                    b  <= {4'd0,  m11[31:4]};
+                    cnt <= 7'd28; acc <= 64'd0; ret <= 5'd13; pc <= RUN_MUL;
+                end
+                5'd13: begin                             // LQ = m20₈·m02₈ − m11₈²  (≥0)
+                    // t1 = 第一个乘积，acc = 第二个乘积 → 必须 t1 − acc
+                    lq <= lq_c;
+                    // W = LQ/A² —— 文档里的第 4 个除法。
+                    //   只作**观测抽头**（给对拍用），判矩仍走下面的「乘后比较」，
+                    //   因此 w 不参与 o_cls，综合会把这条除法链裁掉（资源为 0 增量）。
+                    sh <= {8'd0, lq_c};
+                    b  <= a2;
+                    cnt <= 7'd64; rem <= 33'd0; ret <= 5'd14; pc <= RUN_DIV;
+                end
+                5'd14: begin
+                    w <= w_sat;                          // 18bit 饱和（>0x3FFFF 记满量程）
+                    // 矩形判据"乘后比较"：LQ ≤ 125112·A²
+                    //   等价 f_mom = 16a/(12√(λ1λ2)) ≥ 0.965（A_true = 16a）
+                    sh <= {32'd0, a2};
+                    b  <= {15'd0, 17'd125112};
+                    cnt <= 7'd17; acc <= 64'd0; ret <= 5'd15; pc <= RUN_MUL;
+                end
+                5'd15: begin                             // 判类
+                    o_cls <= ((a >= A_MIN) && (a <= A_MAX)) ?
+                             (circ ? 2'd1 : ((lq <= acc[55:0]) ? 2'd2 : 2'd0)) : 2'd0;
+                    o_done <= 1'b1;
+                    pc <= 5'd0;
+                end
+                //--------------------------------------------------------------
+                default: pc <= 5'd0;
+                endcase
+            end
+        end
+    end
+
+endmodule
