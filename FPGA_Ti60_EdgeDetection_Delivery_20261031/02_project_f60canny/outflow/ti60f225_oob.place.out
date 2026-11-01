@@ -1,0 +1,1060 @@
+           
+           Elitestek FPGA Placement and Routing.
+           Version: 2026.1.132 
+           Compiled: May 29 2026.
+           
+           Copyright (C) 2013 - 2026 Efinix, Inc. All rights reserved.
+
+           
+           The Tool Is Based on VPR of University of Toronto,
+           a free open source code under MIT license.
+           
+WARNING  : Found 5 warnings in the post-synthesis netlist.
+INFO     : Reading core interface constraints file "D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/outflow/ti60f225_oob.interface.csv" [DBMsg::CoreInterfaceConstraintsFileReading]
+INFO     : Successfully read core interface constraints file "D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/outflow/ti60f225_oob.interface.csv" [DBMsg::CoreInterfaceConstraintsFileLoadSuccess]
+INFO     : Creating interface clock pin CLK_27M [DBMsg::NetlistInterfaceClockPinCreated]
+INFO     : Creating interface clock pin clk_100m [DBMsg::NetlistInterfaceClockPinCreated]
+INFO     : Creating interface clock pin fb [DBMsg::NetlistInterfaceClockPinCreated]
+INFO     : Creating interface clock pin hdmi_tx_fast_clk [DBMsg::NetlistInterfaceClockPinCreated]
+INFO     : Creating interface clock pin i_mipi_txc_sclk [DBMsg::NetlistInterfaceClockPinCreated]
+INFO     : Creating interface clock pin i_mipi_txd_sclk [DBMsg::NetlistInterfaceClockPinCreated]
+INFO     : Reading core interface constraints file "D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/outflow/ti60f225_oob.interface.csv" [DBMsg::CoreInterfaceConstraintsFileReading]
+INFO     : Successfully read core interface constraints file "D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/outflow/ti60f225_oob.interface.csv" [DBMsg::CoreInterfaceConstraintsFileLoadSuccess]
+WARNING  : IO cell "pll_inst4_RSTN" has no assigned placement; it will be placed randomly
+INFO     : 1 IO cells will have random placement
+INFO     : XLR count after merging: 58804
+INFO     : Netlist has 37158 luts, 22766 ffs and 5466 adders [PackerMsg::NetlistStatistics]
+INFO     : Packed into 58804 clusters with 2.6212332(1.0230767) inputs(outputs) per cluster for a total of 154139(60161) inputs(outputs) [PackerMsg::ClusterPackingStatistics]
+INFO     : Packed into 58804 xlrs with 2.6212332(1.0230767) inputs(outputs) per xlr for a total of 154139(60161) inputs(outputs) [PackerMsg::XLRPackingStatistics]
+INFO     : Packed 15 fracturable DSPs into 14 clusters [PackerMsg::DSPPackingStatistics]
+INFO     : Packing took 8.5904399 seconds [FlowMsg::StageDuration]
+INFO     :     Packing took 17.890625 seconds (approximately) in total CPU time [FlowMsg::StageDuration::CPUTime]
+INFO     : Packing virtual memory usage: begin = 59.636 MB, end = 432.504 MB, delta = 372.868 MB [FlowMsg::VMUsage]
+INFO     :     Packing peak virtual memory usage = 432.512 MB [FlowMsg::VMUsage::Peak]
+INFO     : Packing resident set memory usage: begin = 64.388 MB, end = 438.712 MB, delta = 374.324 MB [FlowMsg::RSSUsage]
+INFO     :     Packing peak resident set memory usage = 438.712 MB [FlowMsg::RSSUsage::Peak]
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] set_clock_groups: No valid clock(s) found for -group 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] set_clock_groups: Cannot set clock group when only one non-empty group remains
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] Unable to run 'set_clock_groups' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:41] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:41] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:41] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:42] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:42] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:42] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:43] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:43] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:43] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:44] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:44] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:44] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:45] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:45] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:45] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:46] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:46] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:46] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:47] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:47] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:47] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:48] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:48] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:48] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:49] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:49] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:49] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:50] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:50] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:50] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:51] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:51] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:51] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:52] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:52] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:52] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:53] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:53] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:53] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:54] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:54] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:54] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_TDO__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:62] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:62] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:62] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_TDO__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:63] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:63] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:63] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_CAPTURE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:64] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:64] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:64] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_CAPTURE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:65] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:65] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:65] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_RESET__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:66] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:66] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:66] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_RESET__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:67] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:67] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:67] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SEL__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:68] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:68] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:68] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SEL__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:69] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:69] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:69] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_UPDATE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:70] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:70] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:70] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_UPDATE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:71] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:71] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:71] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SHIFT__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:72] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:72] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:72] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SHIFT__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:73] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:73] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:73] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_DRCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:74] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:74] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:74] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_DRCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:75] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:75] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:75] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:86] Missing value for option -period, please type 'create_clock -help' for usage info
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:86] Unable to run 'create_clock' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[14]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:115] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:115] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[14]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:116] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:116] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[15]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:117] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:117] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[15]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:118] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:118] Unable to run 'set_output_delay' constraint due to warnings found
+INFO     : SDC file 'D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc' parsed successfully.
+INFO     : Reading core interface constraints file "D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/outflow/ti60f225_oob.interface.csv" [DBMsg::CoreInterfaceConstraintsFileReading]
+INFO     : Successfully read core interface constraints file "D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/outflow/ti60f225_oob.interface.csv" [DBMsg::CoreInterfaceConstraintsFileLoadSuccess]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/dq_check_en_r3~FF is driven by a non-sequential source u_ddr3_top/u_phy_top/u_ddr_phy_if/i364_2:Q [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell inst_efx_csi2_rx/u_efx_csi2_rx/csi2_rx_top_inst/genblk2.lane_aligner_inst/genblk1[3].u1_inst/genblk2.efx_resetsync_a_rst/active_high.efx_resetsync_active_high/async_reg[0][0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/i189_2 is driven by a non-sequential source LUT__130230:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_data_tx/u_rd_fifo/WrClkRstGen[0]~FF is driven by a non-sequential source LUT__137002:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u2_ctl_fifo/u_efx_fifo_top/genblk2.rd_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_data_tx/u_rd_fifo/RdClkRstGen[1]~FF is driven by a non-sequential source LUT__136996:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell inst_efx_csi2_rx/u_efx_csi2_rx/csi2_rx_top_inst/genblk3.byte2pixel_inst/u1_inst/genblk2.genblk1.efx_resetsync_wr_rst/active_high.efx_resetsync_active_high/async_reg[0][0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/ddr_rden_r3~FF is driven by a non-sequential source u_ddr3_top/u_phy_top/u_ddr_phy_if/i538_2:Q [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/u_ddr_wr_buffer/u_wr_fifo/RdClkRstGen[0]~FF is driven by a non-sequential source LUT__136469:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/lb2_axi_clk.u_lb2_axi_clk/u1_cmd_fifo/u_efx_fifo_top/genblk2.rd_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/ddr_rd_buffer_inst/u_rd_fifo/RdClkRstGen[0]~FF is driven by a non-sequential source LUT__135770:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/ddr_wren_r3~FF is driven by a non-sequential source u_ddr3_top/u_phy_top/u_ddr_phy_if/i189_2:Q [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u2_ctl_fifo/u_efx_fifo_top/genblk2.wr_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell inst_efx_csi2_rx/u_efx_csi2_rx/csi2_rx_top_inst/genblk2.lane_aligner_inst/genblk1[0].u1_inst/genblk2.efx_resetsync_a_rst/active_high.efx_resetsync_active_high/async_reg[0][0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/u_ddr_wr_buffer/u_wr_fifo/WrClkRstGen[1]~FF is driven by a non-sequential source LUT__136471:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/ddr_rd_buffer_inst/u_rd_fifo/WrClkRstGen[1]~FF is driven by a non-sequential source LUT__135727:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/lb2_axi_clk.u_lb2_axi_clk/u3_dout_fifo/u_efx_fifo_top/genblk2.rd_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u1_cmd_fifo/u_efx_fifo_top/genblk2.rd_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_data_tx/u_rd_fifo/RdClkRstGen[0]~FF is driven by a non-sequential source LUT__136995:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell inst_efx_csi2_rx/u_efx_csi2_rx/csi2_rx_top_inst/genblk3.byte2pixel_inst/u1_inst/genblk2.genblk1.efx_resetsync_rd_rst/active_high.efx_resetsync_active_high/async_reg[0][0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/lb2_axi_clk.u_lb2_axi_clk/u1_cmd_fifo/u_efx_fifo_top/genblk2.wr_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/lb2_axi_clk.u_lb2_axi_clk/u2_din_fifo/u_efx_fifo_top/genblk2.rd_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u3_dout_fifo/u_efx_fifo_top/genblk2.rd_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u4_din_fifo/u_efx_fifo_top/genblk2.rd_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell inst_efx_csi2_rx/u_efx_csi2_rx/csi2_rx_top_inst/genblk2.lane_aligner_inst/genblk1[1].u1_inst/genblk2.efx_resetsync_a_rst/active_high.efx_resetsync_active_high/async_reg[0][0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_data_tx/u_rd_fifo/WrClkRstGen[1]~FF is driven by a non-sequential source LUT__136997:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/lb2_axi_clk.u_lb2_axi_clk/u3_dout_fifo/u_efx_fifo_top/genblk2.wr_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u1_cmd_fifo/u_efx_fifo_top/genblk2.wr_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/lb2_axi_clk.u_lb2_axi_clk/u2_din_fifo/u_efx_fifo_top/genblk2.wr_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u3_dout_fifo/u_efx_fifo_top/genblk2.wr_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/u4_din_fifo/u_efx_fifo_top/genblk2.wr_rst[0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/u_ddr_wr_buffer/u_wr_fifo/WrClkRstGen[0]~FF is driven by a non-sequential source LUT__136473:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/ddr_rd_buffer_inst/u_rd_fifo/WrClkRstGen[0]~FF is driven by a non-sequential source LUT__135726:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell inst_efx_csi2_rx/u_efx_csi2_rx/csi2_rx_top_inst/genblk2.lane_aligner_inst/genblk1[2].u1_inst/genblk2.efx_resetsync_a_rst/active_high.efx_resetsync_active_high/async_reg[0][0]~FF is driven by a non-sequential source GND:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/u_ddr_wr_buffer/u_wr_fifo/RdClkRstGen[1]~FF is driven by a non-sequential source LUT__136470:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell u_ddr3_top/u_phy_top/u_ddr_phy_if/i538_2 is driven by a non-sequential source LUT__130280:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Synchronizer chain starting at cell checker0/u_ddr_buffer/ddr_rd_buffer_inst/u_rd_fifo/RdClkRstGen[1]~FF is driven by a non-sequential source LUT__135728:O [FlowMsg::SyncHeadDrivenByNonSeq]
+WARNING  : Timer cuts a combinational loop at the edge from i2557:in[0] to i2557:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2557:in[0] to i2557:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2547:in[0] to i2547:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2547:in[0] to i2547:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2537:in[0] to i2537:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2537:in[0] to i2537:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2527:in[0] to i2527:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2527:in[0] to i2527:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2517:in[0] to i2517:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2517:in[0] to i2517:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2507:in[0] to i2507:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2507:in[0] to i2507:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2497:in[0] to i2497:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2497:in[0] to i2497:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2487:in[0] to i2487:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2487:in[0] to i2487:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2477:in[0] to i2477:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2477:in[0] to i2477:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2467:in[0] to i2467:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2467:in[0] to i2467:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1817:in[0] to i1817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1817:in[0] to i1817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2567:in[0] to i2567:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2567:in[0] to i2567:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2577:in[0] to i2577:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2577:in[0] to i2577:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2587:in[0] to i2587:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2587:in[0] to i2587:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2597:in[0] to i2597:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2597:in[0] to i2597:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2607:in[0] to i2607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2607:in[0] to i2607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2617:in[0] to i2617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2617:in[0] to i2617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2627:in[0] to i2627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2627:in[0] to i2627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2637:in[0] to i2637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2637:in[0] to i2637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2647:in[0] to i2647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2647:in[0] to i2647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2657:in[0] to i2657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2657:in[0] to i2657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2667:in[0] to i2667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2667:in[0] to i2667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2677:in[0] to i2677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2677:in[0] to i2677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1927:in[0] to i1927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1927:in[0] to i1927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1937:in[0] to i1937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1937:in[0] to i1937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2827:in[0] to i2827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2827:in[0] to i2827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2837:in[0] to i2837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2837:in[0] to i2837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3657:in[0] to i3657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3657:in[0] to i3657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3647:in[0] to i3647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3647:in[0] to i3647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3637:in[0] to i3637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3637:in[0] to i3637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3627:in[0] to i3627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3627:in[0] to i3627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3617:in[0] to i3617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3617:in[0] to i3617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2707:in[0] to i2707:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2707:in[0] to i2707:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3607:in[0] to i3607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3607:in[0] to i3607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3667:in[0] to i3667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3667:in[0] to i3667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1947:in[0] to i1947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1947:in[0] to i1947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1957:in[0] to i1957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1957:in[0] to i1957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1967:in[0] to i1967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1967:in[0] to i1967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1977:in[0] to i1977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1977:in[0] to i1977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1987:in[0] to i1987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1987:in[0] to i1987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1997:in[0] to i1997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1997:in[0] to i1997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2007:in[0] to i2007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2007:in[0] to i2007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2017:in[0] to i2017:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2017:in[0] to i2017:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2027:in[0] to i2027:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2027:in[0] to i2027:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2037:in[0] to i2037:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2037:in[0] to i2037:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2047:in[0] to i2047:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2047:in[0] to i2047:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2057:in[0] to i2057:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2057:in[0] to i2057:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2067:in[0] to i2067:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2067:in[0] to i2067:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2077:in[0] to i2077:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2077:in[0] to i2077:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2087:in[0] to i2087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2087:in[0] to i2087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2097:in[0] to i2097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2097:in[0] to i2097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2107:in[0] to i2107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2107:in[0] to i2107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2117:in[0] to i2117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2117:in[0] to i2117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2187:in[0] to i2187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2187:in[0] to i2187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2197:in[0] to i2197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2197:in[0] to i2197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2207:in[0] to i2207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2207:in[0] to i2207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2217:in[0] to i2217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2217:in[0] to i2217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2227:in[0] to i2227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2227:in[0] to i2227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2237:in[0] to i2237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2237:in[0] to i2237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2247:in[0] to i2247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2247:in[0] to i2247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2257:in[0] to i2257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2257:in[0] to i2257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2267:in[0] to i2267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2267:in[0] to i2267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2277:in[0] to i2277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2277:in[0] to i2277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2287:in[0] to i2287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2287:in[0] to i2287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2297:in[0] to i2297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2297:in[0] to i2297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2307:in[0] to i2307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2307:in[0] to i2307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2317:in[0] to i2317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2317:in[0] to i2317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2327:in[0] to i2327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2327:in[0] to i2327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2337:in[0] to i2337:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2337:in[0] to i2337:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2347:in[0] to i2347:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2347:in[0] to i2347:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2357:in[0] to i2357:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2357:in[0] to i2357:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2367:in[0] to i2367:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2367:in[0] to i2367:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2377:in[0] to i2377:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2377:in[0] to i2377:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2387:in[0] to i2387:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2387:in[0] to i2387:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2397:in[0] to i2397:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2397:in[0] to i2397:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2407:in[0] to i2407:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2407:in[0] to i2407:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2417:in[0] to i2417:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2417:in[0] to i2417:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2427:in[0] to i2427:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2427:in[0] to i2427:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2847:in[0] to i2847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2847:in[0] to i2847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2857:in[0] to i2857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2857:in[0] to i2857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2867:in[0] to i2867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2867:in[0] to i2867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2877:in[0] to i2877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2877:in[0] to i2877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2887:in[0] to i2887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2887:in[0] to i2887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2897:in[0] to i2897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2897:in[0] to i2897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2907:in[0] to i2907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2907:in[0] to i2907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2917:in[0] to i2917:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2917:in[0] to i2917:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2927:in[0] to i2927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2927:in[0] to i2927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2937:in[0] to i2937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2937:in[0] to i2937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2947:in[0] to i2947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2947:in[0] to i2947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2957:in[0] to i2957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2957:in[0] to i2957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2967:in[0] to i2967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2967:in[0] to i2967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2977:in[0] to i2977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2977:in[0] to i2977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2987:in[0] to i2987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2987:in[0] to i2987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2997:in[0] to i2997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2997:in[0] to i2997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3007:in[0] to i3007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3007:in[0] to i3007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3087:in[0] to i3087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3087:in[0] to i3087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3097:in[0] to i3097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3097:in[0] to i3097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3107:in[0] to i3107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3107:in[0] to i3107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3117:in[0] to i3117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3117:in[0] to i3117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3127:in[0] to i3127:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3127:in[0] to i3127:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3137:in[0] to i3137:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3137:in[0] to i3137:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3147:in[0] to i3147:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3147:in[0] to i3147:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3157:in[0] to i3157:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3157:in[0] to i3157:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3167:in[0] to i3167:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3167:in[0] to i3167:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3177:in[0] to i3177:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3177:in[0] to i3177:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3187:in[0] to i3187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3187:in[0] to i3187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3197:in[0] to i3197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3197:in[0] to i3197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3207:in[0] to i3207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3207:in[0] to i3207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3217:in[0] to i3217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3217:in[0] to i3217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3227:in[0] to i3227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3227:in[0] to i3227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3237:in[0] to i3237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3237:in[0] to i3237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3247:in[0] to i3247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3247:in[0] to i3247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3257:in[0] to i3257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3257:in[0] to i3257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3267:in[0] to i3267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3267:in[0] to i3267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3277:in[0] to i3277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3277:in[0] to i3277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3287:in[0] to i3287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3287:in[0] to i3287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3297:in[0] to i3297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3297:in[0] to i3297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3307:in[0] to i3307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3307:in[0] to i3307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3317:in[0] to i3317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3317:in[0] to i3317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3327:in[0] to i3327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3327:in[0] to i3327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3727:in[0] to i3727:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3727:in[0] to i3727:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3717:in[0] to i3717:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3717:in[0] to i3717:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3737:in[0] to i3737:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3737:in[0] to i3737:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3837:in[0] to i3837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3837:in[0] to i3837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3827:in[0] to i3827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3827:in[0] to i3827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3817:in[0] to i3817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3817:in[0] to i3817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3807:in[0] to i3807:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3807:in[0] to i3807:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3797:in[0] to i3797:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3797:in[0] to i3797:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3787:in[0] to i3787:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3787:in[0] to i3787:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3777:in[0] to i3777:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3777:in[0] to i3777:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3767:in[0] to i3767:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3767:in[0] to i3767:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3757:in[0] to i3757:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3757:in[0] to i3757:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3747:in[0] to i3747:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3747:in[0] to i3747:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3847:in[0] to i3847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3847:in[0] to i3847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3857:in[0] to i3857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3857:in[0] to i3857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3867:in[0] to i3867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3867:in[0] to i3867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3877:in[0] to i3877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3877:in[0] to i3877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3887:in[0] to i3887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3887:in[0] to i3887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3897:in[0] to i3897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3897:in[0] to i3897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3907:in[0] to i3907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3907:in[0] to i3907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3677:in[0] to i3677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3677:in[0] to i3677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3687:in[0] to i3687:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3687:in[0] to i3687:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3697:in[0] to i3697:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3697:in[0] to i3697:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3707:in[0] to i3707:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3707:in[0] to i3707:out [TimerMsg::CombinationalLoopDetected]
+INFO     : Starting Global Placer with 16 threads ...
+            ----------     -------  --------------     -------
+             Iteration       WHPWL Worst Slack (ps) Convergence
+            ----------     -------  --------------     -------
+INFO     :           1    23288644             226         1.3%
+INFO     :           2    19354188               8         1.7%
+INFO     :           3    13927738             254         3.0%
+INFO     :           4     9296550             304         5.6%
+INFO     :           5     6509999             245        10.2%
+INFO     :           6     4498073             224        21.5%
+INFO     :           7     3958143              51        28.1%
+INFO     :           8     3474923             173        37.0%
+INFO     :           9     3329455             128        40.0%
+INFO     :          10     3131167             127        46.8%
+INFO     :          11     3106378               4        47.9%
+INFO     :          12     2998216             171        52.5%
+INFO     :          13     3004216             222        52.5%
+INFO     :          14     2933561             217        55.5%
+INFO     :          15     2918172             126        55.5%
+INFO     :          16     2894996             321        57.0%
+INFO     :          17     2831543             188        59.9%
+INFO     :          18     2852547             171        59.9%
+INFO     :          19     2819061              23        61.8%
+INFO     :          20     2828556              46        61.8%
+INFO     :          21     2796839              22        63.9%
+INFO     :          22     2836294             122        63.9%
+INFO     :          23     2791048             154        65.2%
+INFO     :          24     2808492              55        65.2%
+INFO     :          25     2788183              60        66.3%
+INFO     :          26     2813084            -187        66.3%
+INFO     :          27     2767535             -49        68.3%
+INFO     :          28     2816125             115        68.3%
+INFO     :          29     2779736             -40        69.1%
+INFO     :          30     2793346              26        69.1%
+INFO     :          31     2783178              64        70.5%
+INFO     :          32     2817787              44        70.5%
+INFO     :          33     2799019             -18        72.3%
+INFO     :          34     2822233             139        72.3%
+INFO     :          35     2798214             -26        73.1%
+INFO     :          36     2825566            -130        73.1%
+INFO     :          37     2807643            -398        74.3%
+INFO     :          38     2860953              46        74.3%
+INFO     :          39     2841485            -192        74.9%
+INFO     :          40     2760017            -294        74.9%
+INFO     :          41     2723405            -252        78.2%
+INFO     :          42     2772791              -5        78.2%
+INFO     :          43     2653018             -11        83.6%
+INFO     :          44     2813158            -367        83.6%
+INFO     :          45     2666019            -186        84.5%
+INFO     :          46     2817105            -787        84.5%
+INFO     :          47     2756662            -116        84.5%
+INFO     :          48     2667972            -761        85.4%
+INFO     :          49     2816833            -266        85.4%
+INFO     :          50     2796378            -220        85.4%
+INFO     :          51     2724328            -456        85.5%
+INFO     :          52     2678808            -477        87.1%
+INFO     :          53     3027120            -331        87.1%
+INFO     :          54     2833465            -371        88.0%
+INFO     : GP: best_placement: wpd: 3988.53
+INFO     : Starting Annealer
+            ----------     -------  --------------     -------
+             Iteration       WHPWL  Delay Max (ps)     R Limit
+            ----------     -------  --------------     -------
+INFO     :           0     1858111            7760        30.0
+INFO     :           1     2719829            7308        90.0
+INFO     :           2     2463816            2258        25.7
+INFO     :           3     2217522            2247        23.4
+INFO     :           4     2061896            2202        21.3
+INFO     :           5     1952733            2202        19.2
+INFO     :           6     1873916            2187        17.4
+INFO     :           7     1814010            2148        15.6
+INFO     :           8     1768281            2148        14.1
+INFO     :           9     1728254            2148        12.6
+INFO     :          10     1695233            2212        11.4
+INFO     :          11     1671383            2148        10.2
+INFO     :          12     1645131            2152         9.2
+INFO     :          13     1620255            2152         8.2
+INFO     :          14     1597743            2152         7.4
+INFO     :          15     1580074            2152         6.6
+INFO     :          16     1563230            2171         5.9
+INFO     :          17     1548879            2171         5.3
+INFO     :          18     1534467            2171         4.8
+INFO     :          19     1522180            2152         4.3
+INFO     :          20     1511522            2152         3.8
+INFO     :          21     1503960            2171         3.4
+INFO     :          22     1495624            2152         3.1
+INFO     :          23     1489277            2171         2.8
+INFO     :          24     1485773            2171         2.5
+INFO     : DP: best_placement: wpd: 17.2179
+INFO     : Starting incremental timing annealer
+INFO     : Starting incremental timing quench 1 with temperature 0.1 and 0.2 moves per pass
+            ----------     -------  --------------     -------
+             Iteration       WHPWL  Delay Max (ps)     R Limit
+            ----------     -------  --------------     -------
+INFO     :           0     1671383            2148        30.0
+INFO     :           1     1683518            2037        26.9
+INFO     :           2     1684884            1940        24.2
+INFO     :           3     1684528            1991        21.7
+INFO     :           4     1678491            1960        19.5
+INFO     :           5     1674111            1992        17.5
+INFO     :           6     1666970            1940        15.7
+INFO     :           7     1659534            1960        14.1
+INFO     :           8     1649620            2014        12.6
+INFO     :           9     1640537            1906        11.3
+INFO     : DP: best_placement: wpd: -1
+INFO     : Placement successful: 59098 cells are placed
+INFO     : Peak congestion smeared over 4x4 of the chip is 1.86774 at 153,44
+INFO     : Peak congestion smeared over 1/16 of the chip is 1.36007 at 151,212
+INFO     : Peak congestion smeared over 1/4 of the chip is 0.99644 at 121,323
+INFO     : Congestion-weighted HPWL per net: 35.127
+INFO     : Post-placement cluster-level checks is successful
+INFO     : Post-placement primitive-level checks is successful
+INFO     : Placement took 135.5717527 seconds [FlowMsg::StageDuration]
+INFO     :     Placement took 987.59375 seconds (approximately) in total CPU time [FlowMsg::StageDuration::CPUTime]
+INFO     : Placement virtual memory usage: begin = 105.352 MB, end = 333.22 MB, delta = 227.868 MB [FlowMsg::VMUsage]
+INFO     :     Placement peak virtual memory usage = 661.732 MB [FlowMsg::VMUsage::Peak]
+INFO     : Placement resident set memory usage: begin = 119.148 MB, end = 350.552 MB, delta = 231.404 MB [FlowMsg::RSSUsage]
+INFO     :     Placement peak resident set memory usage = 679.236 MB [FlowMsg::RSSUsage::Peak]
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] set_clock_groups: No valid clock(s) found for -group 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] set_clock_groups: Cannot set clock group when only one non-empty group remains
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:25] Unable to run 'set_clock_groups' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:41] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:41] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:41] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:42] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:42] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:42] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:43] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:43] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:43] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:44] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:44] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:44] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:45] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:45] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:45] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:46] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:46] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:46] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:47] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:47] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:47] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:48] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:48] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:48] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:49] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:49] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:49] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:50] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:50] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:50] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:51] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:51] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:51] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:52] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:52] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:52] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:53] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:53] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:53] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:54] No clocks matched 'jtag_inst1_TCK'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:54] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:54] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_TDO__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:62] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:62] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:62] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_TDO__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:63] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:63] set_output_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:63] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_CAPTURE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:64] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:64] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:64] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_CAPTURE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:65] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:65] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:65] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_RESET__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:66] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:66] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:66] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_RESET__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:67] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:67] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:67] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SEL__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:68] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:68] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:68] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SEL__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:69] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:69] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:69] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_UPDATE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:70] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:70] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:70] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_UPDATE__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:71] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:71] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:71] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SHIFT__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:72] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:72] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:72] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_SHIFT__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:73] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:73] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:73] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_DRCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:74] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:74] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:74] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : No ports matched 'jtag_inst2_autodbg_DRCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:75] No clocks matched 'jtag_inst2_autodbg_TCK__'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:75] set_input_delay: No valid clock found for -clock
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:75] Unable to run 'set_input_delay' constraint due to warnings found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:86] Missing value for option -period, please type 'create_clock -help' for usage info
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:86] Unable to run 'create_clock' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[14]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:115] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:115] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[14]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:116] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:116] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[15]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:117] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:117] Unable to run 'set_output_delay' constraint due to warnings found
+WARNING  : No ports matched 'ddr_addr[15]'
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:118] set_output_delay: No valid output port(s) found
+WARNING  : [SDC D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc:118] Unable to run 'set_output_delay' constraint due to warnings found
+INFO     : SDC file 'D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/ti60f225_oob.sdc' parsed successfully.
+WARNING  : Timer cuts a combinational loop at the edge from i2557:in[0] to i2557:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2557:in[0] to i2557:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2547:in[0] to i2547:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2547:in[0] to i2547:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2537:in[0] to i2537:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2537:in[0] to i2537:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2527:in[0] to i2527:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2527:in[0] to i2527:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2517:in[0] to i2517:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2517:in[0] to i2517:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2507:in[0] to i2507:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2507:in[0] to i2507:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2497:in[0] to i2497:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2497:in[0] to i2497:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2487:in[0] to i2487:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2487:in[0] to i2487:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2477:in[0] to i2477:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2477:in[0] to i2477:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2467:in[0] to i2467:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2467:in[0] to i2467:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1817:in[0] to i1817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1817:in[0] to i1817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2567:in[0] to i2567:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2567:in[0] to i2567:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2577:in[0] to i2577:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2577:in[0] to i2577:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2587:in[0] to i2587:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2587:in[0] to i2587:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2597:in[0] to i2597:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2597:in[0] to i2597:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2607:in[0] to i2607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2607:in[0] to i2607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2617:in[0] to i2617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2617:in[0] to i2617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2627:in[0] to i2627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2627:in[0] to i2627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2637:in[0] to i2637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2637:in[0] to i2637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2647:in[0] to i2647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2647:in[0] to i2647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2657:in[0] to i2657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2657:in[0] to i2657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2667:in[0] to i2667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2667:in[0] to i2667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2677:in[0] to i2677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2677:in[0] to i2677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1927:in[0] to i1927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1927:in[0] to i1927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1937:in[0] to i1937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1937:in[0] to i1937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2827:in[0] to i2827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2827:in[0] to i2827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2837:in[0] to i2837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2837:in[0] to i2837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3657:in[0] to i3657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3657:in[0] to i3657:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3647:in[0] to i3647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3647:in[0] to i3647:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3637:in[0] to i3637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3637:in[0] to i3637:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3627:in[0] to i3627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3627:in[0] to i3627:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3617:in[0] to i3617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3617:in[0] to i3617:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2707:in[0] to i2707:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2707:in[0] to i2707:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3607:in[0] to i3607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3607:in[0] to i3607:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3667:in[0] to i3667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3667:in[0] to i3667:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1947:in[0] to i1947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1947:in[0] to i1947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1957:in[0] to i1957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1957:in[0] to i1957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1967:in[0] to i1967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1967:in[0] to i1967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1977:in[0] to i1977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1977:in[0] to i1977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1987:in[0] to i1987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1987:in[0] to i1987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1997:in[0] to i1997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i1997:in[0] to i1997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2007:in[0] to i2007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2007:in[0] to i2007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2017:in[0] to i2017:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2017:in[0] to i2017:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2027:in[0] to i2027:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2027:in[0] to i2027:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2037:in[0] to i2037:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2037:in[0] to i2037:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2047:in[0] to i2047:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2047:in[0] to i2047:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2057:in[0] to i2057:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2057:in[0] to i2057:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2067:in[0] to i2067:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2067:in[0] to i2067:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2077:in[0] to i2077:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2077:in[0] to i2077:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2087:in[0] to i2087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2087:in[0] to i2087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2097:in[0] to i2097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2097:in[0] to i2097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2107:in[0] to i2107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2107:in[0] to i2107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2117:in[0] to i2117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2117:in[0] to i2117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2187:in[0] to i2187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2187:in[0] to i2187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2197:in[0] to i2197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2197:in[0] to i2197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2207:in[0] to i2207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2207:in[0] to i2207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2217:in[0] to i2217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2217:in[0] to i2217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2227:in[0] to i2227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2227:in[0] to i2227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2237:in[0] to i2237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2237:in[0] to i2237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2247:in[0] to i2247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2247:in[0] to i2247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2257:in[0] to i2257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2257:in[0] to i2257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2267:in[0] to i2267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2267:in[0] to i2267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2277:in[0] to i2277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2277:in[0] to i2277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2287:in[0] to i2287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2287:in[0] to i2287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2297:in[0] to i2297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2297:in[0] to i2297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2307:in[0] to i2307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2307:in[0] to i2307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2317:in[0] to i2317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2317:in[0] to i2317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2327:in[0] to i2327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2327:in[0] to i2327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2337:in[0] to i2337:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2337:in[0] to i2337:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2347:in[0] to i2347:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2347:in[0] to i2347:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2357:in[0] to i2357:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2357:in[0] to i2357:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2367:in[0] to i2367:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2367:in[0] to i2367:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2377:in[0] to i2377:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2377:in[0] to i2377:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2387:in[0] to i2387:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2387:in[0] to i2387:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2397:in[0] to i2397:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2397:in[0] to i2397:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2407:in[0] to i2407:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2407:in[0] to i2407:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2417:in[0] to i2417:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2417:in[0] to i2417:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2427:in[0] to i2427:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2427:in[0] to i2427:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2847:in[0] to i2847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2847:in[0] to i2847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2857:in[0] to i2857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2857:in[0] to i2857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2867:in[0] to i2867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2867:in[0] to i2867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2877:in[0] to i2877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2877:in[0] to i2877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2887:in[0] to i2887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2887:in[0] to i2887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2897:in[0] to i2897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2897:in[0] to i2897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2907:in[0] to i2907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2907:in[0] to i2907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2917:in[0] to i2917:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2917:in[0] to i2917:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2927:in[0] to i2927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2927:in[0] to i2927:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2937:in[0] to i2937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2937:in[0] to i2937:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2947:in[0] to i2947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2947:in[0] to i2947:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2957:in[0] to i2957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2957:in[0] to i2957:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2967:in[0] to i2967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2967:in[0] to i2967:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2977:in[0] to i2977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2977:in[0] to i2977:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2987:in[0] to i2987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2987:in[0] to i2987:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2997:in[0] to i2997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i2997:in[0] to i2997:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3007:in[0] to i3007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3007:in[0] to i3007:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3087:in[0] to i3087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3087:in[0] to i3087:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3097:in[0] to i3097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3097:in[0] to i3097:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3107:in[0] to i3107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3107:in[0] to i3107:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3117:in[0] to i3117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3117:in[0] to i3117:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3127:in[0] to i3127:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3127:in[0] to i3127:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3137:in[0] to i3137:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3137:in[0] to i3137:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3147:in[0] to i3147:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3147:in[0] to i3147:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3157:in[0] to i3157:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3157:in[0] to i3157:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3167:in[0] to i3167:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3167:in[0] to i3167:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3177:in[0] to i3177:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3177:in[0] to i3177:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3187:in[0] to i3187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3187:in[0] to i3187:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3197:in[0] to i3197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3197:in[0] to i3197:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3207:in[0] to i3207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3207:in[0] to i3207:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3217:in[0] to i3217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3217:in[0] to i3217:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3227:in[0] to i3227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3227:in[0] to i3227:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3237:in[0] to i3237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3237:in[0] to i3237:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3247:in[0] to i3247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3247:in[0] to i3247:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3257:in[0] to i3257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3257:in[0] to i3257:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3267:in[0] to i3267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3267:in[0] to i3267:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3277:in[0] to i3277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3277:in[0] to i3277:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3287:in[0] to i3287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3287:in[0] to i3287:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3297:in[0] to i3297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3297:in[0] to i3297:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3307:in[0] to i3307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3307:in[0] to i3307:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3317:in[0] to i3317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3317:in[0] to i3317:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3327:in[0] to i3327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3327:in[0] to i3327:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3727:in[0] to i3727:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3727:in[0] to i3727:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3717:in[0] to i3717:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3717:in[0] to i3717:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3737:in[0] to i3737:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3737:in[0] to i3737:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3837:in[0] to i3837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3837:in[0] to i3837:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3827:in[0] to i3827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3827:in[0] to i3827:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3817:in[0] to i3817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3817:in[0] to i3817:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3807:in[0] to i3807:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3807:in[0] to i3807:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3797:in[0] to i3797:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3797:in[0] to i3797:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3787:in[0] to i3787:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3787:in[0] to i3787:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3777:in[0] to i3777:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3777:in[0] to i3777:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3767:in[0] to i3767:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3767:in[0] to i3767:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3757:in[0] to i3757:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3757:in[0] to i3757:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3747:in[0] to i3747:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3747:in[0] to i3747:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3847:in[0] to i3847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3847:in[0] to i3847:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3857:in[0] to i3857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3857:in[0] to i3857:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3867:in[0] to i3867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3867:in[0] to i3867:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3877:in[0] to i3877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3877:in[0] to i3877:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3887:in[0] to i3887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3887:in[0] to i3887:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3897:in[0] to i3897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3897:in[0] to i3897:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3907:in[0] to i3907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3907:in[0] to i3907:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3677:in[0] to i3677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3677:in[0] to i3677:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3687:in[0] to i3687:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3687:in[0] to i3687:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3697:in[0] to i3697:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3697:in[0] to i3697:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3707:in[0] to i3707:out [TimerMsg::CombinationalLoopDetected]
+WARNING  : Timer cuts a combinational loop at the edge from i3707:in[0] to i3707:out [TimerMsg::CombinationalLoopDetected]
+Maximum possible analyzed clocks frequency
+   Clock Name     Period (ns)  Frequency (MHz)     Edge
+tx_cal_clk_90edge     2.274       439.754         (R-R)
+sdram_clk             2.162       462.535         (R-R)
+rx_cal_clk            2.084       479.846         (R-R)
+tx_cal_clk            2.154       464.253         (R-R)
+vid_clk_dvi2         10.910        91.659         (R-R)
+hdmi_tx_slow_clk      5.737       174.307         (R-R)
+core_clk              6.426       155.618         (R-R)
+i_mipi_rx_pclk        4.594       217.675         (R-R)
+CLK_5M                2.715       368.324         (R-R)
+i_cam_ck_CLKOUT       4.339       230.468         (R-R)
+
+Geomean max period: 3.700
+
+Setup (Max) Clock Relationship
+  Launch Clock      Capture Clock   Constraint (ns)     Slack (ns)          Edge
+tx_cal_clk_90edge tx_cal_clk_90edge       2.500            0.226           (R-R)
+tx_cal_clk_90edge tx_cal_clk              2.500            1.030           (R-R)
+tx_cal_clk_90edge core_clk                2.500            2.094           (R-R)
+sdram_clk         tx_cal_clk_90edge       2.500            1.042           (R-R)
+sdram_clk         sdram_clk               2.500            0.338           (R-R)
+rx_cal_clk        rx_cal_clk              2.500            0.416           (R-R)
+tx_cal_clk        tx_cal_clk              2.500            0.346           (R-R)
+vid_clk_dvi2      vid_clk_dvi2           13.468            2.558           (R-R)
+vid_clk_dvi2      hdmi_tx_slow_clk        6.734            2.861           (R-R)
+hdmi_tx_slow_clk  hdmi_tx_slow_clk        6.734            0.997           (R-R)
+core_clk          tx_cal_clk_90edge       2.500            1.526           (R-R)
+core_clk          core_clk               10.000            3.574           (R-R)
+core_clk          i_cam_ck_CLKOUT        10.000            8.990           (R-R)
+i_mipi_rx_pclk    i_mipi_rx_pclk         20.000           15.406           (R-R)
+i_mipi_rx_pclk    i_cam_ck_CLKOUT        10.000            8.595           (R-R)
+CLK_5M            CLK_5M                200.000          197.285           (R-R)
+i_cam_ck_CLKOUT   i_mipi_rx_pclk         10.000            8.728           (R-R)
+i_cam_ck_CLKOUT   i_cam_ck_CLKOUT        10.000            5.661           (R-R)
+
+Hold (Min) Clock Relationship
+  Launch Clock      Capture Clock   Constraint (ns)     Slack (ns)          Edge
+tx_cal_clk_90edge tx_cal_clk_90edge      0.000            0.076            (R-R)
+tx_cal_clk_90edge tx_cal_clk             0.000            1.085            (R-R)
+tx_cal_clk_90edge core_clk               0.000            0.149            (R-R)
+sdram_clk         tx_cal_clk_90edge      0.000            0.733            (R-R)
+sdram_clk         sdram_clk              0.000            0.067            (R-R)
+rx_cal_clk        rx_cal_clk             0.000            0.098            (R-R)
+tx_cal_clk        tx_cal_clk             0.000            0.179            (R-R)
+vid_clk_dvi2      vid_clk_dvi2           0.000            0.097            (R-R)
+vid_clk_dvi2      hdmi_tx_slow_clk       0.000            0.220            (R-R)
+hdmi_tx_slow_clk  hdmi_tx_slow_clk       0.000            0.097            (R-R)
+core_clk          tx_cal_clk_90edge      0.000            0.149            (R-R)
+core_clk          core_clk               0.000            0.097            (R-R)
+core_clk          i_cam_ck_CLKOUT        0.000            0.195            (R-R)
+i_mipi_rx_pclk    i_mipi_rx_pclk         0.000            0.179            (R-R)
+i_mipi_rx_pclk    i_cam_ck_CLKOUT        0.000            0.195            (R-R)
+CLK_5M            CLK_5M                 0.000            0.179            (R-R)
+i_cam_ck_CLKOUT   i_mipi_rx_pclk         0.000            0.195            (R-R)
+i_cam_ck_CLKOUT   i_cam_ck_CLKOUT        0.000            0.179            (R-R)
+
+INFO     : Write Timing Report to "D:/fpga/result/FPGA_Ti60_EdgeDetection_Delivery_20261031/02_project_f60canny/outflow/ti60f225_oob.place.timing.rpt" ...
